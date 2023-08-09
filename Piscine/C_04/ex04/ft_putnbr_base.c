@@ -6,7 +6,7 @@
 /*   By: uijo <uijo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:43:44 by uijo              #+#    #+#             */
-/*   Updated: 2023/08/08 19:01:25 by uijo             ###   ########.fr       */
+/*   Updated: 2023/08/10 06:36:23 by uijo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,21 @@ void	ft_putnbr_base(int nbr, char *base)
 {	
 	unsigned int	temp;
 	char			a[32];
-	int				len[2];
+	int				i;
+	int				len;
 
-	len[0] = 0;
-	len[1] = check_base(base);
-	if (len[1])
+	i = 0;
+	len = check_base(base);
+	if (len)
 	{
 		print_nb(nbr, base, &temp);
 		while (temp != 0)
 		{
-			a[len[0]++] = base[temp % len[1]];
-			temp /= len[1];
-			if (temp < len[1])
-			{
-				a[len[0]++] = base[temp];
-				temp /= len[1];
-			}
+			a[i++] = base[temp % len];
+			temp /= len;
 		}
-		a[len[0]] = '\0';
-		while (len[0] != 0)
-			write(1, &a[--len[0]], 1);
+		a[i] = '\0';
+		while (i != 0)
+			write(1, &a[--i], 1);
 	}
 }
